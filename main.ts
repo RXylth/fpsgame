@@ -817,7 +817,7 @@ function StartUp () {
         cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
         cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc
         `)
-    tiles.placeOnTile(mysprite, tiles.getTileLocation(7, 7))
+    tiles.placeOnTile(mysprite, tiles.getTileLocation(14, 14))
     tiles.setCurrentTilemap(tilemap`level1`)
     Weapon = sprites.create(img`
         ........................................
@@ -865,7 +865,13 @@ function StartUp () {
     Weapon.setPosition(80, 98)
     Weapon.setFlag(SpriteFlag.RelativeToCamera, true)
 }
+sprites.onOverlap(SpriteKind.Projectile, SpriteKind.Enemy, function (sprite, otherSprite) {
+    let Ailens: Sprite = null
+    sprites.destroy(Ailens)
+    info.changeScoreBy(1)
+})
 let mysprite: Sprite = null
 let projectile: Sprite = null
 let Weapon: Sprite = null
 StartUp()
+info.setScore(0)
